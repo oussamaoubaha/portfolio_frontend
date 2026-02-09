@@ -3,7 +3,7 @@ export const portfolioData = {
   name: "Oussama Oubaha",
   title: "Étudiant en Génie Informatique",
   subtitle: "À la recherche d'un stage de fin d'études",
-  email: "oussama.oubaha24@email.com",
+  email: "oussama.oubaha24@gmail.com",
   location: "Maroc",
 
   // ── Hero ──
