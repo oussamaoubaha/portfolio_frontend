@@ -29,36 +29,38 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          {/* Profile photo */}
-          {photoUrl && (
+          {/* Profile photo with Definitive External Aura */}
+          <div className="relative flex items-center justify-center mx-auto mb-12">
+            {/* Double Layer Aura (Animated breathing effect) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="mx-auto mb-8 w-44 h-44 md:w-48 md:h-48 rounded-full overflow-hidden border border-white/10"
+              animate={{
+                opacity: [0.4, 0.9, 0.4],
+                scale: [0.95, 1.05, 0.95]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <img
-                src={photoUrl}
-                alt={name}
-                className="w-full h-full object-cover object-[center_35%]"
-              />
+              {/* Outer Soft Glow */}
+              <div className="absolute w-64 h-64 bg-blue-500/40 blur-[40px] rounded-full" />
+              {/* Inner Neon Ring */}
+              <div className="absolute w-48 h-48 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.8)]" />
             </motion.div>
-          )}
 
-          {!photoUrl && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="mx-auto mb-8 w-44 h-44 md:w-48 md:h-48 rounded-full overflow-hidden border border-white/10 bg-primary/10"
+            {/* Static Profile Photo */}
+            <div
+              className="relative w-48 h-48 rounded-full overflow-hidden border border-white/5 shadow-2xl z-10 bg-black"
             >
               <img
-                src="/OUSSAMA.jpg"
+                src={photoUrl || "/OUSSAMA.jpg"}
                 alt={name}
-                className="w-full h-full object-cover object-[center_35%]"
+                className="w-full h-full object-cover object-[center_25%]"
               />
-            </motion.div>
-          )}
+            </div>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}

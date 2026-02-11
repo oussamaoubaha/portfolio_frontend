@@ -33,7 +33,7 @@ const EducationSection = () => {
             <div className="p-2 rounded-lg bg-primary/10">
               <GraduationCap className="text-primary" size={20} />
             </div>
-            <h2 className="font-heading text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-slate-900 dark:text-white text-3xl font-bold">
               Formation
             </h2>
           </motion.div>
