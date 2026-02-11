@@ -13,7 +13,7 @@ const HeroSection = () => {
   const photoUrl = profile?.photo_url;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-hero overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-hero overflow-hidden pt-32">
       {/* Subtle grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -40,7 +40,7 @@ const HeroSection = () => {
               <img
                 src={photoUrl}
                 alt={name}
-                className="w-full h-full object-cover object-[center_20%]"
+                className="w-full h-full object-cover object-[center_35%]"
               />
             </motion.div>
           )}
@@ -55,7 +55,7 @@ const HeroSection = () => {
               <img
                 src="/OUSSAMA.jpg"
                 alt={name}
-                className="w-full h-full object-cover object-[center_20%]"
+                className="w-full h-full object-cover object-[center_35%]"
               />
             </motion.div>
           )}

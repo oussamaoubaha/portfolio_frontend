@@ -38,7 +38,7 @@ const SkillsSection = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-3xl font-bold text-slate-900 dark:text-blue-600 text-foreground">
+            <h2 className="font-heading text-3xl font-bold text-slate-900 dark:text-white">
               Compétences
             </h2>
           </motion.div>
