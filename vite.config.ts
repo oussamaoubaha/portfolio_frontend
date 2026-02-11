@@ -18,4 +18,19 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("framer-motion")) return "vendor-framer";
+            if (id.includes("lucide-react")) return "vendor-lucide";
+            if (id.includes("react-router-dom") || id.includes("@remix-run") || id.includes("react-router")) return "vendor-router";
+            return "vendor";
+          }
+        },
+      },
+    },
+  },
 }));
