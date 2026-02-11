@@ -14,6 +14,7 @@ export const portfolioData = {
       "Passionné par le développement web et les technologies modernes. Je recherche un stage de fin d'études de 2 mois pour contribuer à des projets innovants.",
     ctaPrimary: "Télécharger CV",
     ctaSecondary: "Me contacter",
+    cvUrl: "/Oubaha_Oussama.pdf",
   },
 
   // ── À propos ──
@@ -96,4 +97,13 @@ export const portfolioData = {
     { label: "Formation", href: "#education" },
     { label: "Contact", href: "#contact" },
   ],
+
+  // ── Social Links ──
+  social: {
+    linkedin: "https://www.linkedin.com/in/oussama-oubaha/",
+    github: "https://github.com/oussama-oubaha",
+    facebook: "https://www.facebook.com/oussama.oubaha.5",
+    instagram: "https://www.instagram.com/oussama_oubaha/",
+    whatsapp: "https://wa.me/212628468305", // Example number, adjust if needed
+  },
 };

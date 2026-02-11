@@ -12,12 +12,12 @@ const EducationSection = () => {
   const items =
     dbEducation && dbEducation.length > 0
       ? dbEducation.map((e) => ({
-          degree: e.degree,
-          school: e.school,
-          location: e.location || "",
-          period: e.period,
-          description: e.description || "",
-        }))
+        degree: e.degree,
+        school: e.school,
+        location: e.location || "",
+        period: e.period,
+        description: e.description || "",
+      }))
       : portfolioData.education.items;
 
   return (
@@ -33,7 +33,7 @@ const EducationSection = () => {
             <div className="p-2 rounded-lg bg-primary/10">
               <GraduationCap className="text-primary" size={20} />
             </div>
-            <h2 className="font-heading text-3xl font-bold text-foreground">
+            <h2 className="font-heading text-3xl font-bold text-slate-900 dark:text-blue-600 text-foreground">
               Formation
             </h2>
           </motion.div>

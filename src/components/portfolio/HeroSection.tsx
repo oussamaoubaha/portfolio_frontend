@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Download, Mail, ChevronDown } from "lucide-react";
 import { useProfile } from "@/hooks/usePortfolioData";
 import { portfolioData } from "@/data/portfolioData";
+import SocialLinks from "./SocialLinks";
 
 const HeroSection = () => {
   const { data: profile } = useProfile();
@@ -93,9 +94,9 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
-              href="/Oubaha_Oussama.pdf"
+              href={portfolioData.hero.cvUrl}
               download="Oubaha_Oussama.pdf"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all duration-300 glow"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all duration-300 glow animate-pulse-subtle"
             >
               <Download size={18} />
               Télécharger CV
@@ -108,6 +109,8 @@ const HeroSection = () => {
               Me contacter
             </a>
           </motion.div>
+
+          <SocialLinks />
         </div>
 
         {/* Scroll indicator */}

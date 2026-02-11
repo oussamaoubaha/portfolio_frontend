@@ -20,12 +20,12 @@ const SkillsSection = () => {
   const categories =
     dbCategories && dbCategories.length > 0
       ? dbCategories.map((c) => ({
-          name: c.name,
-          icon: c.icon,
-          items: (c.skills || [])
-            .sort((a: any, b: any) => a.display_order - b.display_order)
-            .map((s: any) => s.name),
-        }))
+        name: c.name,
+        icon: c.icon,
+        items: (c.skills || [])
+          .sort((a: any, b: any) => a.display_order - b.display_order)
+          .map((s: any) => s.name),
+      }))
       : portfolioData.skills.categories;
 
   return (
@@ -38,7 +38,7 @@ const SkillsSection = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-3xl font-bold text-foreground">
+            <h2 className="font-heading text-3xl font-bold text-slate-900 dark:text-blue-600 text-foreground">
               Compétences
             </h2>
           </motion.div>

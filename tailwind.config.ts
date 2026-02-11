@@ -89,12 +89,17 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        "pulse-subtle": {
+          "0%, 100%": { transform: "scale(1)", boxShadow: "0 0 0 0 rgba(var(--primary), 0.4)" },
+          "50%": { transform: "scale(1.05)", boxShadow: "0 0 20px 0 rgba(var(--primary), 0.2)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.5s ease-out forwards",
+        "pulse-subtle": "pulse-subtle 2s infinite ease-in-out",
       },
     },
   },
