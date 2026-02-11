@@ -35,7 +35,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="mx-auto mb-8 w-32 h-32 aspect-square rounded-full overflow-hidden border-4 border-primary/20 shadow-xl shadow-primary/20"
+              className="mx-auto mb-8 w-44 h-44 md:w-48 md:h-48 rounded-full overflow-hidden border border-white/10"
             >
               <img
                 src={photoUrl}
@@ -50,7 +50,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="mx-auto mb-8 w-32 h-32 aspect-square rounded-full overflow-hidden border-4 border-primary/20 shadow-xl shadow-primary/20 bg-primary/10"
+              className="mx-auto mb-8 w-44 h-44 md:w-48 md:h-48 rounded-full overflow-hidden border border-white/10 bg-primary/10"
             >
               <img
                 src="/OUSSAMA.jpg"
