@@ -62,7 +62,7 @@ export const portfolioData = {
         role: "Développeur Web Front-end",
         company: "Maktoub-Tech",
         location: "Fès, Maroc",
-        period: "2024",
+        period: "2025",
         type: "Stage",
         missions: [
           "Développement d'une plateforme E-commerce complète et performante",
