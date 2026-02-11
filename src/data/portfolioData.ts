@@ -100,10 +100,10 @@ export const portfolioData = {
 
   // ── Social Links ──
   social: {
-    linkedin: "https://www.linkedin.com/in/oussama-oubaha/",
+    linkedin: "https://www.linkedin.com/in/oussama-oubaha-75951436a/",
     github: "https://github.com/oussama-oubaha",
-    facebook: "https://www.facebook.com/oussama.oubaha.5",
-    instagram: "https://www.instagram.com/oussama_oubaha/",
-    whatsapp: "https://wa.me/212628468305", // Example number, adjust if needed
+    facebook: "https://www.facebook.com/oussama.ou.9699",
+    instagram: "https://www.instagram.com/oussama.ou18/",
+    whatsapp: "https://wa.me/+212628841979", // Example number, adjust if needed
   },
 };
