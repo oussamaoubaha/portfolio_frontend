@@ -81,7 +81,7 @@ export const portfolioData = {
         degree: "DUT en Conception et Développement des Logiciels",
         school: "EST d'Oujda",
         location: "Oujda, Maroc",
-        period: "2023 – 2025",
+        period: "2024 – 2026",
         description:
           "Formation approfondie en génie logiciel couvrant la programmation, les bases de données, le développement web et les systèmes d'information.",
       },
