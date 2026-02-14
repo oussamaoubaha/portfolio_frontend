@@ -27,7 +27,7 @@ const api = axios.create({
         'Accept': 'application/json',
     },
     withCredentials: false, // Explicitly disable cookies for Token-Auth
-    // withXSRFToken: false, // Not standard axios, but ensuring it's off
+    withXSRFToken: false, // Explicitly disable XSRF token handling
 
 });
 
