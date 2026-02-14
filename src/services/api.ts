@@ -26,6 +26,9 @@ const api = axios.create({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
     },
+    withCredentials: false, // Explicitly disable cookies for Token-Auth
+    // withXSRFToken: false, // Not standard axios, but ensuring it's off
+
 });
 
 // Interceptor to add token if available (for future Admin use)
