@@ -10,13 +10,18 @@ import AdminSkills from "@/components/admin/AdminSkills";
 import AdminExperiences from "@/components/admin/AdminExperiences";
 import AdminFeedback from "@/components/admin/AdminFeedback";
 import AdminEducation from "@/components/admin/AdminEducation";
+import AdminAILogs from "@/components/admin/AdminAILogs";
+import KnowledgeManager from "@/components/admin/KnowledgeManager";
+import AdminProjects from "@/components/admin/AdminProjects";
+import { Bot, BookOpen, Layout } from "lucide-react";
 
-type Tab = "profile" | "skills" | "experiences" | "education" | "feedback";
+type Tab = "profile" | "skills" | "experiences" | "projects" | "education" | "feedback" | "ai_logs" | "knowledge";
 
 const AdminPage = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<Tab>("profile");
+  const [prefillKnowledge, setPrefillKnowledge] = useState<string | null>(null);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -46,8 +51,11 @@ const AdminPage = () => {
     { id: "profile", label: "Profil", icon: User },
     { id: "skills", label: "Compétences", icon: Wrench },
     { id: "experiences", label: "Expériences", icon: Briefcase },
+    { id: "projects", label: "Projets", icon: Layout },
     { id: "education", label: "Formation", icon: GraduationCap },
     { id: "feedback", label: "Avis", icon: MessageSquare },
+    { id: "ai_logs", label: "Assistant OUBA-SYS", icon: Bot },
+    { id: "knowledge", label: "Base de Connaissances", icon: BookOpen },
   ];
 
   return (
@@ -96,8 +104,8 @@ const AdminPage = () => {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground hover:text-foreground"
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
                 }`}
             >
               <tab.icon size={16} />
@@ -111,8 +119,14 @@ const AdminPage = () => {
           {activeTab === "profile" && <AdminProfile userId={user.id} />}
           {activeTab === "skills" && <AdminSkills userId={user.id} />}
           {activeTab === "experiences" && <AdminExperiences userId={user.id} />}
+          {activeTab === "projects" && <AdminProjects userId={user.id} />}
           {activeTab === "education" && <AdminEducation userId={user.id} />}
           {activeTab === "feedback" && <AdminFeedback />}
+          {activeTab === "ai_logs" && <AdminAILogs onPrefillKnowledge={(q) => {
+            setPrefillKnowledge(q);
+            setActiveTab("knowledge");
+          }} />}
+          {activeTab === "knowledge" && <KnowledgeManager prefillQuestion={prefillKnowledge} onClearPrefill={() => setPrefillKnowledge(null)} />}
         </div>
       </div>
     </div>

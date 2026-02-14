@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import api from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Plus, Trash2, Save } from "lucide-react";
+import { Plus, Trash2, Save, Edit2 } from "lucide-react";
 
 interface Props {
   userId: string;
@@ -22,6 +22,7 @@ const AdminExperiences = ({ userId }: Props) => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [newMission, setNewMission] = useState<Record<string, string>>({});
   const queryClient = useQueryClient();
 
@@ -51,25 +52,50 @@ const AdminExperiences = ({ userId }: Props) => {
     }
   };
 
-  const addExperience = async () => {
+  const handleSave = async () => {
     if (!form.role.trim() || !form.company.trim() || !form.period.trim()) {
       toast.error("Veuillez remplir les champs obligatoires");
       return;
     }
 
     try {
-      await api.post("/experiences", form);
-      toast.success("Expérience ajoutée !");
-      setForm({ role: "", company: "", location: "", period: "", type: "Stage", missions: [] });
-      setShowForm(false);
+      if (editingId) {
+        await api.put(`/experiences/${editingId}`, form);
+        toast.success("Expérience mise à jour !");
+      } else {
+        await api.post("/experiences", form);
+        toast.success("Expérience ajoutée !");
+      }
+      resetForm();
       fetchData();
       queryClient.invalidateQueries({ queryKey: ["experiences"] });
     } catch (error) {
-      toast.error("Erreur lors de l'ajout");
+      toast.error("Erreur lors de l'enregistrement");
     }
   };
 
+  const resetForm = () => {
+    setForm({ role: "", company: "", location: "", period: "", type: "Stage", missions: [] });
+    setEditingId(null);
+    setShowForm(false);
+  };
+
+  const editExperience = (exp: Experience) => {
+    setForm({
+      role: exp.role,
+      company: exp.company,
+      location: exp.location || "",
+      period: exp.period,
+      type: exp.type || "Stage",
+      missions: exp.missions || [],
+    });
+    setEditingId(exp.id);
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const deleteExperience = async (id: number) => {
+    if (!confirm("Voulez-vous vraiment supprimer cette expérience ?")) return;
     try {
       await api.delete(`/experiences/${id}`);
       toast.success("Expérience supprimée !");
@@ -88,15 +114,17 @@ const AdminExperiences = ({ userId }: Props) => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="font-heading text-xl font-bold text-foreground">
-          Gestion des expériences
+          {editingId ? "Modifier l'expérience" : "Gestion des expériences"}
         </h2>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all"
-        >
-          <Plus size={16} />
-          Ajouter
-        </button>
+        {!showForm && (
+          <button
+            onClick={() => setShowForm(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all"
+          >
+            <Plus size={16} />
+            Ajouter
+          </button>
+        )}
       </div>
 
       {/* Add form */}
@@ -216,14 +244,14 @@ const AdminExperiences = ({ userId }: Props) => {
 
           <div className="flex gap-3">
             <button
-              onClick={addExperience}
+              onClick={handleSave}
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all"
             >
               <Save size={16} />
-              Enregistrer
+              {editingId ? "Mettre à jour" : "Enregistrer"}
             </button>
             <button
-              onClick={() => setShowForm(false)}
+              onClick={resetForm}
               className="px-6 py-2.5 rounded-lg border border-input text-sm font-medium text-foreground hover:bg-muted transition-colors"
             >
               Annuler
@@ -247,12 +275,22 @@ const AdminExperiences = ({ userId }: Props) => {
                 {exp.company} — {exp.period}
               </p>
             </div>
-            <button
-              onClick={() => deleteExperience(exp.id)}
-              className="p-2 text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
-            >
-              <Trash2 size={16} />
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => editExperience(exp)}
+                className="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                title="Modifier"
+              >
+                <Edit2 size={16} />
+              </button>
+              <button
+                onClick={() => deleteExperience(exp.id)}
+                className="p-2 text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
+                title="Supprimer"
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
           </div>
           {exp.missions && exp.missions.length > 0 && (
             <ul className="space-y-1">

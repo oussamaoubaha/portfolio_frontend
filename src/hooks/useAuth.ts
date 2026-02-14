@@ -36,7 +36,7 @@ export function useAuth() {
     try {
       // Laravel Sanctum requires hitting the CSRF endpoint for SPA 
       // authentication before the login request.
-      await api.get('/../sanctum/csrf-cookie');
+      await api.get('/sanctum/csrf-cookie', { baseURL: '/' });
 
       const { data } = await api.post('/login', { email, password });
       localStorage.setItem('token', data.token);

@@ -12,12 +12,13 @@ const FeedbackSection = () => {
   const { data: feedbackList, refetch } = useApprovedFeedback();
 
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !message.trim()) {
+    if (!name.trim() || !message.trim() || !email.trim()) {
       toast.error("Veuillez remplir tous les champs");
       return;
     }
@@ -26,11 +27,13 @@ const FeedbackSection = () => {
     try {
       await api.post('/reviews', {
         author: name.trim(),
+        guest_email: email.trim(),
         content: message.trim(),
-        rating: 5 // Default rating or add UI for it
+        rating: 5
       });
       toast.success("Merci pour votre avis ! Il sera affiché après validation.");
       setName("");
+      setEmail("");
       setMessage("");
     } catch (error) {
       toast.error("Erreur lors de l'envoi");
@@ -129,6 +132,18 @@ const FeedbackSection = () => {
                     onChange={(e) => setName(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                     placeholder="EX : Oubaha Oussama"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">
+                    Votre email
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    placeholder="exemple@mail.com"
                   />
                 </div>
                 <div>

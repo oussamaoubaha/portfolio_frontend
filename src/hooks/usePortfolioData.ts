@@ -1,12 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "@/services/api";
-import { Profile, Skill, Experience, Review } from "@/types";
+import { Profile, Skill, Experience, Review, Project } from "@/types";
 
 export function useProfile() {
   return useQuery({
     queryKey: ["profile"],
     queryFn: async () => {
       const { data } = await api.get<Profile>("/profile");
+      return data;
+    },
+  });
+}
+
+export function useProjects() {
+  return useQuery({
+    queryKey: ["projects"],
+    queryFn: async () => {
+      const { data } = await api.get<Project[]>("/projects");
       return data;
     },
   });

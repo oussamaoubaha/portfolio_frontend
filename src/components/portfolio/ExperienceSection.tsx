@@ -12,13 +12,15 @@ const ExperienceSection = () => {
   const experiences =
     dbExperiences && dbExperiences.length > 0
       ? dbExperiences.map((e) => ({
-          role: e.role,
-          company: e.company,
-          location: e.location || "",
-          period: e.period,
-          type: e.type || "Stage",
-          missions: Array.isArray(e.missions) ? (e.missions as string[]) : [],
-        }))
+        role: e.role,
+        company: e.company,
+        location: e.location || "",
+        period: e.period,
+        type: e.type || "Stage",
+        missions: Array.isArray(e.missions)
+          ? (e.missions as string[])
+          : (typeof e.missions === 'string' ? JSON.parse(e.missions) : []),
+      }))
       : portfolioData.experiences.items;
 
   return (

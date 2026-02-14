@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Download, Mail, ChevronDown } from "lucide-react";
+import { Download, Mail, ChevronDown, Bot } from "lucide-react";
 import { useProfile } from "@/hooks/usePortfolioData";
 import { portfolioData } from "@/data/portfolioData";
 import SocialLinks from "./SocialLinks";
@@ -7,10 +7,10 @@ import SocialLinks from "./SocialLinks";
 const HeroSection = () => {
   const { data: profile } = useProfile();
 
-  const name = profile?.full_name || portfolioData.hero.headline;
+  const name = profile?.name || portfolioData.hero.headline;
   const title = profile?.title || portfolioData.hero.tagline;
   const subtitle = profile?.subtitle || portfolioData.hero.description;
-  const photoUrl = profile?.photo_url;
+  const photoUrl = profile?.hero_image;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-hero overflow-hidden pt-32">
@@ -96,7 +96,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
-              href={portfolioData.hero.cvUrl}
+              href={profile?.cv_url || portfolioData.hero.cvUrl}
               download="Oubaha_Oussama.pdf"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all duration-300 glow animate-pulse-subtle"
             >
@@ -110,9 +110,21 @@ const HeroSection = () => {
               <Mail size={18} />
               Me contacter
             </a>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent("open-chat"))}
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-500 font-medium hover:bg-blue-500/20 transition-all duration-300"
+            >
+              <img
+                src="/Assistant.png"
+                alt="Assistant Logo"
+                className="w-7 h-7 rounded-full object-contain border border-blue-400/50"
+                style={{ filter: "drop-shadow(0 0 8px rgba(37,99,235,0.8))" }}
+              />
+              Demander à mon Assistant
+            </button>
           </motion.div>
 
-          <SocialLinks />
+          <SocialLinks profile={profile} />
         </div>
 
         {/* Scroll indicator */}

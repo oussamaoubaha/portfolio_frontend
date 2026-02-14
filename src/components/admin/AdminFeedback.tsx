@@ -6,10 +6,13 @@ import { Trash2, Check, Clock, MessageSquare } from "lucide-react";
 interface Feedback {
   id: number;
   author: string;
+  guest_email?: string;
+  google_email?: string;
   role?: string;
   content: string;
   rating: number;
   is_active: boolean;
+  is_published: boolean;
   created_at: string;
 }
 
@@ -32,13 +35,13 @@ const AdminFeedback = () => {
     }
   };
 
-  const toggleApproval = async (id: number, currentlyApproved: boolean) => {
+  const togglePublish = async (id: number, currentlyPublished: boolean) => {
     try {
-      await api.put(`/reviews/${id}`, { is_active: !currentlyApproved });
-      toast.success(currentlyApproved ? "Avis masqué" : "Avis approuvé !");
+      await api.patch(`/avis/${id}/publish`);
+      toast.success(!currentlyPublished ? "Avis validé et publié !" : "Avis retiré du site");
       fetchFeedback();
     } catch (error) {
-      toast.error("Erreur");
+      toast.error("Erreur lors de la mise à jour");
     }
   };
 
@@ -77,15 +80,23 @@ const AdminFeedback = () => {
           {feedback.map((item) => (
             <div
               key={item.id}
-              className={`bg-card rounded-xl p-5 border transition-all ${item.is_active
-                  ? "border-primary/30"
-                  : "border-border"
+              className={`bg-card rounded-xl p-5 border transition-all ${item.is_published
+                ? "border-primary/30"
+                : "border-border"
                 }`}
             >
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <p className="font-medium text-foreground">{item.author} {item.role && <span className="text-muted-foreground">({item.role})</span>}</p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="font-medium text-foreground">
+                    {item.author} {item.role && <span className="text-muted-foreground">({item.role})</span>}
+                  </p>
+                  {item.guest_email && (
+                    <p className="text-xs text-primary font-medium">Saisi : {item.guest_email}</p>
+                  )}
+                  {item.google_email && (
+                    <p className="text-xs text-blue-500 font-medium">Google : {item.google_email}</p>
+                  )}
+                  <p className="text-xs text-muted-foreground mt-1">
                     {new Date(item.created_at).toLocaleDateString("fr-FR", {
                       day: "numeric",
                       month: "long",
@@ -95,14 +106,14 @@ const AdminFeedback = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => toggleApproval(item.id, item.is_active)}
-                    className={`p-2 rounded-lg transition-colors ${item.is_active
-                        ? "bg-primary/10 text-primary"
-                        : "bg-muted text-muted-foreground hover:text-foreground"
+                    onClick={() => togglePublish(item.id, item.is_published)}
+                    className={`p-2 rounded-lg transition-colors ${item.is_published
+                      ? "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400"
+                      : "bg-muted text-muted-foreground hover:text-foreground"
                       }`}
-                    title={item.is_active ? "Masquer" : "Approuver"}
+                    title={item.is_published ? "Retirer du site" : "Valider et Publier"}
                   >
-                    {item.is_active ? <Check size={16} /> : <Clock size={16} />}
+                    {item.is_published ? <Check size={16} /> : <Check size={16} className="opacity-50" />}
                   </button>
                   <button
                     onClick={() => deleteFeedback(item.id)}
@@ -117,12 +128,12 @@ const AdminFeedback = () => {
               </p>
               <div className="mt-3">
                 <span
-                  className={`text-xs font-medium px-2 py-1 rounded-full ${item.is_active
-                      ? "bg-primary/10 text-primary"
-                      : "bg-muted text-muted-foreground"
+                  className={`text-xs font-medium px-2 py-1 rounded-full ${item.is_published
+                    ? "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400"
+                    : "bg-muted text-muted-foreground"
                     }`}
                 >
-                  {item.is_active ? "Approuvé" : "En attente"}
+                  {item.is_published ? "Publié" : "En attente"}
                 </span>
                 <span className="text-xs ml-2 text-yellow-500">
                   {'★'.repeat(item.rating)}

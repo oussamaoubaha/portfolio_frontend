@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, Lock, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import api from "@/services/api";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -143,6 +144,24 @@ const AuthPage = () => {
               {isLogin ? "S'inscrire" : "Se connecter"}
             </button>
           </p>
+
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                toast.info("Test de connexion en cours...");
+                const res = await api.get('/ping');
+                toast.success("CONNEXION RÉUSSIE: " + JSON.stringify(res.data));
+                console.log("PING:", res.data);
+              } catch (e: any) {
+                toast.error("ÉCHEC CONNEXION: " + e.message);
+                console.error("PING ERROR:", e);
+              }
+            }}
+            className="mt-6 w-full py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg text-sm font-medium transition-colors"
+          >
+            Test de Connexion (Debug)
+          </button>
         </div>
       </motion.div>
     </div>

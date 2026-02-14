@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import api from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Plus, Trash2, Save, GraduationCap } from "lucide-react";
+import { Plus, Trash2, Save, GraduationCap, Edit2 } from "lucide-react";
 
 interface Props {
   userId: string;
@@ -21,6 +21,7 @@ const AdminEducation = ({ userId }: Props) => {
   const [education, setEducation] = useState<Education[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<number | null>(null);
   const queryClient = useQueryClient();
 
   const [form, setForm] = useState({
@@ -57,33 +58,58 @@ const AdminEducation = ({ userId }: Props) => {
     }
   };
 
-  const addEducation = async () => {
+  const handleSave = async () => {
     if (!form.school.trim() || !form.degree.trim() || !form.period.trim()) {
       toast.error("Veuillez remplir les champs obligatoires");
       return;
     }
 
     try {
-      // Map form back to Experience structure
-      await api.post("/experiences", {
+      const payload = {
         company: form.school,
         role: form.degree,
         period: form.period,
         location: form.location,
         description: form.description,
         type: 'Education'
-      });
-      toast.success("Formation ajoutée !");
-      setForm({ school: "", degree: "", period: "", location: "", description: "" });
-      setShowForm(false);
+      };
+
+      if (editingId) {
+        await api.put(`/formations/${editingId}`, payload);
+        toast.success("Formation mise à jour !");
+      } else {
+        await api.post("/experiences", payload);
+        toast.success("Formation ajoutée !");
+      }
+      resetForm();
       fetchData();
       queryClient.invalidateQueries({ queryKey: ["education"] });
     } catch (error) {
-      toast.error("Erreur lors de l'ajout");
+      toast.error("Erreur lors de l'enregistrement");
     }
   };
 
+  const resetForm = () => {
+    setForm({ school: "", degree: "", period: "", location: "", description: "" });
+    setEditingId(null);
+    setShowForm(false);
+  };
+
+  const editEducation = (edu: Education) => {
+    setForm({
+      school: edu.school,
+      degree: edu.degree,
+      period: edu.period,
+      location: edu.location || "",
+      description: edu.description || "",
+    });
+    setEditingId(edu.id);
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const deleteEducation = async (id: number) => {
+    if (!confirm("Voulez-vous vraiment supprimer cette formation ?")) return;
     try {
       await api.delete(`/experiences/${id}`);
       toast.success("Formation supprimée !");
@@ -102,15 +128,17 @@ const AdminEducation = ({ userId }: Props) => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="font-heading text-xl font-bold text-foreground">
-          Gestion des formations
+          {editingId ? "Modifier la formation" : "Gestion des formations"}
         </h2>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all"
-        >
-          <Plus size={16} />
-          Ajouter
-        </button>
+        {!showForm && (
+          <button
+            onClick={() => setShowForm(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all"
+          >
+            <Plus size={16} />
+            Ajouter
+          </button>
+        )}
       </div>
 
       {showForm && (
@@ -179,14 +207,14 @@ const AdminEducation = ({ userId }: Props) => {
           </div>
           <div className="flex gap-3">
             <button
-              onClick={addEducation}
+              onClick={handleSave}
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all"
             >
               <Save size={16} />
-              Enregistrer
+              {editingId ? "Mettre à jour" : "Enregistrer"}
             </button>
             <button
-              onClick={() => setShowForm(false)}
+              onClick={resetForm}
               className="px-6 py-2.5 rounded-lg border border-input text-sm font-medium text-foreground hover:bg-muted transition-colors"
             >
               Annuler
@@ -214,12 +242,22 @@ const AdminEducation = ({ userId }: Props) => {
                 )}
               </div>
             </div>
-            <button
-              onClick={() => deleteEducation(edu.id)}
-              className="p-2 text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
-            >
-              <Trash2 size={16} />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => editEducation(edu)}
+                className="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                title="Modifier"
+              >
+                <Edit2 size={16} />
+              </button>
+              <button
+                onClick={() => deleteEducation(edu.id)}
+                className="p-2 text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
+                title="Supprimer"
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
           </div>
           {edu.description && (
             <p className="text-sm text-muted-foreground mt-2 ml-11 leading-relaxed">

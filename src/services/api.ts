@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api', // Laravel API URL
+    baseURL: import.meta.env.VITE_API_URL || '/api',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -17,5 +17,20 @@ api.interceptors.request.use((config) => {
     }
     return config;
 });
+
+// Response interceptor for better error logging
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        console.error("API Error Interceptor:", {
+            url: error.config?.url,
+            method: error.config?.method,
+            status: error.response?.status,
+            data: error.response?.data,
+            message: error.message
+        });
+        return Promise.reject(error);
+    }
+);
 
 export default api;

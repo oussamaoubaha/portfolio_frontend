@@ -8,6 +8,24 @@ export interface Profile {
     location: string;
     hero_image?: string;
     about_text?: string;
+    cv_url?: string;
+    social_links?: {
+        linkedin?: string;
+        github?: string;
+        facebook?: string;
+        instagram?: string;
+        whatsapp?: string;
+    };
+}
+
+export interface Project {
+    id?: number;
+    title: string;
+    description: string;
+    image_url?: string;
+    project_url?: string;
+    technologies?: string[];
+    order?: number;
 }
 
 export interface Skill {
@@ -32,8 +50,11 @@ export interface Experience {
 export interface Review {
     id?: number;
     author: string;
+    guest_email?: string;
     role?: string;
     content: string;
     rating: number;
     is_active: boolean;
+    is_published: boolean;
+    created_at: string;
 }
