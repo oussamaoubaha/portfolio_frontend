@@ -26,8 +26,6 @@ const api = axios.create({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
     },
-    withCredentials: true, // For Sanctum/CSRF
-    withXSRFToken: true, // Required for Laravel 11+ Sanctum
 });
 
 // Interceptor to add token if available (for future Admin use)

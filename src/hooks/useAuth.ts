@@ -34,12 +34,8 @@ export function useAuth() {
 
   const signIn = async (email: string, password: string) => {
     try {
-      // Laravel Sanctum requires hitting the CSRF endpoint for SPA 
-      // authentication before the login request.
-      // Laravel Sanctum CSRF endpoint is at the root, not under /api.
-      // We need to fetch it from the backend domain.
-      const backendUrl = import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '');
-      await api.get('/sanctum/csrf-cookie', { baseURL: backendUrl });
+      // Token-based auth: No need to fetch CSRF cookie manually.
+      // The backend returns a token which we include in headers.
 
       const { data } = await api.post('/login', { email, password });
       localStorage.setItem('token', data.token);
