@@ -1,7 +1,27 @@
 import axios from 'axios';
 
+const getBaseURL = () => {
+    let url = import.meta.env.VITE_API_URL || '';
+
+    // If we're in development and no URL is provided, default to local proxy
+    if (!url && import.meta.env.DEV) return '/api';
+
+    // Normalize URL: remove trailing slash
+    url = url.replace(/\/$/, "");
+
+    // Ensure it ends with /api to avoid "double /api/api" if the user input it, 
+    // or if the calls expect it in the baseURL.
+    // If the user provided '.../api', we keep it. 
+    // If they provided '...', we append '/api'.
+    if (!url.endsWith('/api')) {
+        url += '/api';
+    }
+
+    return url;
+};
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || '/api',
+    baseURL: getBaseURL(),
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
