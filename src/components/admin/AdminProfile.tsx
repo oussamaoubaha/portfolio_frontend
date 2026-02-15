@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+// Admin Profile Component - Updated for Image Upload
 import api from "@/services/api";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -69,8 +70,69 @@ const AdminProfile = ({ userId }: Props) => {
   };
 
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    // TODO: Implement file upload endpoint in Laravel
-    toast.error("L'upload d'image n'est pas encore implémenté côté serveur.");
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setUploading(true);
+
+      const formData = new FormData();
+      // Append all existing text fields to FormData (backend validation might require them)
+      Object.entries(form).forEach(([key, value]) => {
+        if (key !== 'social_links' && key !== 'hero_image') {
+          formData.append(key, value as string);
+        }
+        if (key === 'social_links') {
+          // Send social_links as JSON string or individual fields depending on backend expectation. 
+          // Since ProfileUpdateRequest likely handles JSON array/object, we might need to send it carefully.
+          // For simplicity/safety, let's just send the image in a separate PATCH request OR send everything.
+          // Laravel's PUT/PATCH with FormData is tricky. Best to use POST with _method=PUT or just POST if route allows.
+          // The current route is POST /profile.
+        }
+      });
+
+      // We mainly want to upload the image here. 
+      // Let's create a specific payload just for the image update, 
+      // BUT existing controller expects ProfileUpdateRequest which might require other fields.
+      // Easiest way: Send everything including the new image.
+
+      formData.append("hero_image", file);
+
+      // Append social links as JSON string if backend handles it, or rely on the fact that we are updating.
+      // Actually, to avoid validation errors on missing fields, we should append current form state.
+      formData.append("name", form.name);
+      formData.append("title", form.title);
+      formData.append("subtitle", form.subtitle);
+      formData.append("email", form.email);
+      formData.append("location", form.location);
+      formData.append("about_text", form.about_text);
+      formData.append("cv_url", form.cv_url);
+
+      // Social links need to be sent properly. If backend expects JSON:
+      // formData.append("social_links", JSON.stringify(form.social_links)); 
+      // ...Wait, backend casts social_links to array/json. 
+      // Laravel validation 'nullable|array'. 
+      // FormData doesn't support arrays directly like JSON. We usually do social_links[linkedin]...
+      Object.entries(form.social_links).forEach(([k, v]) => {
+        formData.append(`social_links[${k}]`, v);
+      });
+
+      try {
+        const { data } = await api.post('/profile', formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        // Update local state with new image URL
+        setForm(prev => ({ ...prev, hero_image: data.hero_image }));
+        toast.success("Photo de profil mise à jour !");
+        queryClient.invalidateQueries({ queryKey: ["profile"] });
+      } catch (error) {
+        console.error("Upload failed", error);
+        toast.error("Erreur lors de l'upload");
+      } finally {
+        setUploading(false);
+      }
+    }
   };
 
   if (loading) {
