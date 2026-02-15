@@ -37,6 +37,7 @@ export function useAuth() {
       // Token-based auth: No need to fetch CSRF cookie manually.
       // The backend returns a token which we include in headers.
 
+      console.log("Sending Login Credentials:", { email, password });
       const { data } = await api.post('/login', { email, password });
       localStorage.setItem('token', data.token);
       setUser(data.user);
