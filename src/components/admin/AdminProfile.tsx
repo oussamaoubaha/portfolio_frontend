@@ -21,7 +21,9 @@ const AdminProfile = ({ userId }: Props) => {
     email: "",
     location: "",
     about_text: "",
-    hero_image: "", // Changed from photo_url
+    hero_image: "",
+    cv_url: "",
+    social_links: {} as Record<string, string>,
   });
 
   useEffect(() => {
@@ -40,6 +42,8 @@ const AdminProfile = ({ userId }: Props) => {
           location: data.location || "",
           about_text: data.about_text || "",
           hero_image: data.hero_image || "",
+          cv_url: data.cv_url || "",
+          social_links: data.social_links || {},
         });
       }
     } catch (error) {
@@ -121,7 +125,7 @@ const AdminProfile = ({ userId }: Props) => {
             </label>
             <input
               type="text"
-              value={form[key as keyof typeof form]}
+              value={form[key as keyof typeof form] as string}
               onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
               className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
             />
@@ -139,6 +143,41 @@ const AdminProfile = ({ userId }: Props) => {
           rows={5}
           className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none"
         />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium text-foreground mb-1.5 block">
+          Lien VC (URL PDF)
+        </label>
+        <input
+          type="text"
+          value={form.cv_url}
+          onChange={(e) => setForm((f) => ({ ...f, cv_url: e.target.value }))}
+          className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+        />
+      </div>
+
+      <div className="space-y-4">
+        <h3 className="font-heading text-lg font-bold text-foreground border-b border-border pb-2">Réseaux Sociaux</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {["linkedin", "github", "facebook", "instagram", "whatsapp"].map((social) => (
+            <div key={social}>
+              <label className="text-sm font-medium text-foreground mb-1.5 block capitalize">
+                {social}
+              </label>
+              <input
+                type="text"
+                value={form.social_links?.[social] || ""}
+                onChange={(e) => setForm((f) => ({
+                  ...f,
+                  social_links: { ...f.social_links, [social]: e.target.value }
+                }))}
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                placeholder={`URL ${social}`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <button
