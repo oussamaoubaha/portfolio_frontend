@@ -14,58 +14,31 @@ export default {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: "rgba(255, 255, 255, 0.08)",
+        input: "rgba(255, 255, 255, 0.03)",
+        ring: "#3B82F6",
+        background: "#050A14",
+        foreground: "#F8FAFC",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#3B82F6",
+          foreground: "#F8FAFC",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "#06B6D4",
+          foreground: "#F8FAFC",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "#64748B",
+          foreground: "#F8FAFC",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
-        hero: {
-          DEFAULT: "hsl(var(--hero-bg))",
-          foreground: "hsl(var(--hero-foreground))",
-          muted: "hsl(var(--hero-muted))",
+          DEFAULT: "rgba(255, 255, 255, 0.03)",
+          foreground: "#F8FAFC",
         },
       },
       fontFamily: {
-        heading: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
-        body: ['"Inter"', 'system-ui', 'sans-serif'],
+        display: ["Clash Display", "Space Grotesk", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -93,6 +66,10 @@ export default {
           "0%, 100%": { transform: "scale(1)", boxShadow: "0 0 0 0 rgba(var(--primary), 0.4)" },
           "50%": { transform: "scale(1.05)", boxShadow: "0 0 20px 0 rgba(var(--primary), 0.2)" },
         },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -100,6 +77,7 @@ export default {
         "fade-up": "fade-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "pulse-subtle": "pulse-subtle 2s infinite ease-in-out",
+        "spin-slow": "spin-slow 8s linear infinite",
       },
     },
   },

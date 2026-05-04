@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Linkedin, Github, Facebook, Instagram } from "lucide-react";
 import { portfolioData } from "@/data/portfolioData";
 import { Profile } from "@/types";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 interface SocialLinksProps {
     profile?: Profile | null;
@@ -68,83 +69,41 @@ const SocialLinks = ({ profile }: SocialLinksProps) => {
     ];
 
     return (
-        <div className="flex flex-wrap justify-center gap-6 mt-12 py-6 px-4">
-            {socialItems.map((item, index) => (
-                <motion.a
-                    key={item.name}
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                        opacity: 1,
-                        y: [0, -10, 0]
-                    }}
-                    transition={{
-                        opacity: { duration: 0.5, delay: index * 0.1 },
-                        y: {
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: index * 0.2
-                        }
-                    }}
-                    whileHover={{
-                        scale: 1.2,
-                        transition: { duration: 0.2 }
-                    }}
-                    className={`group relative p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl transition-all duration-300 hover:z-20 ${item.hoverShadow}`}
-                    style={{}}
-                >
-                    <div
-                        className="text-hero-foreground/70 group-hover:text-white transition-colors duration-300"
-                        style={{
-                            transition: "color 0.3s ease-in-out"
-                        }}
+        <ScrollReveal direction="up" delay={0.7}>
+            <div className="flex flex-wrap justify-center gap-6 mt-12 py-6 px-4">
+                {socialItems.map((item, index) => (
+                    <a
+                        key={item.name}
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`group relative p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl transition-all duration-300 hover:z-20 social-icon ${item.hoverShadow}`}
+                        data-cursor="link"
                     >
-                        {/* Overlay for brand color on hover */}
-                        <motion.div
-                            className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
-                            style={{
-                                background: item.isGradient ? item.color : item.color,
-                                opacity: 0
-                            }}
-                            whileHover={{ opacity: 0.2 }}
-                        />
-
-                        <div className="relative z-10 transition-colors duration-300 group-hover:text-white"
-                            style={{ color: "inherit" }}>
-                            {/* We wrap the icon to apply color directly on hover */}
-                            <style dangerouslySetInnerHTML={{
-                                __html: `
-                     .group-${item.name}:hover {
-                       color: ${item.isGradient ? '#fff' : item.color} !important;
-                     }
-                   `}} />
+                        <div className="text-hero-foreground/70 group-hover:text-white transition-colors duration-300">
+                            {/* Overlay for brand color on hover */}
                             <div
-                                className="transition-all duration-300"
+                                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
                                 style={{
-                                    color: "currentColor"
+                                    background: item.isGradient ? item.color : item.color,
+                                    opacity: 0
                                 }}
-                                onMouseEnter={(e) => {
-                                    if (!item.isGradient) e.currentTarget.style.color = item.color;
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.color = "";
-                                }}
-                            >
+                            />
+
+                            <div className="relative z-10 transition-colors duration-300 group-hover:text-white"
+                                 style={{ color: "inherit" }}>
                                 {item.icon}
                             </div>
                         </div>
-                    </div>
 
-                    {/* Tooltip */}
-                    <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                        {item.name}
-                    </span>
-                </motion.a>
-            ))}
-        </div>
+                        {/* Tooltip */}
+                        <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                            {item.name}
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </ScrollReveal>
     );
 };
 

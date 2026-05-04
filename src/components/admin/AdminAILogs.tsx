@@ -103,20 +103,20 @@ const AdminAILogs = ({ onPrefillKnowledge }: { onPrefillKnowledge?: (q: string) 
     return (
         <div className="space-y-8">
             {/* Configuration Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-xl border border-blue-500/20 bg-blue-500/5 backdrop-blur-md">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-xl border border-primary/20 bg-primary/5 backdrop-blur-md">
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
                         <label className="text-sm font-bold text-foreground">System Prompt Global</label>
                         <button
                             onClick={() => updateSetting('system_prompt')}
                             disabled={saving['system_prompt']}
-                            className="text-xs font-bold text-blue-500 hover:text-blue-400 disabled:opacity-50"
+                            className="text-xs font-bold text-primary hover:text-primary-light disabled:opacity-50"
                         >
                             {saving['system_prompt'] ? "Enregistrement..." : "Sauvegarder"}
                         </button>
                     </div>
                     <textarea
-                        className="w-full min-h-[120px] p-3 rounded-lg bg-card border border-border text-sm focus:ring-2 focus:ring-blue-500/50 outline-none transition-all"
+                        className="w-full min-h-[120px] p-3 rounded-lg bg-card border border-border text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all"
                         placeholder="Identité, ton, instructions linguistiques..."
                         value={settings.system_prompt}
                         onChange={(e) => setSettings(prev => ({ ...prev, system_prompt: e.target.value }))}
@@ -129,13 +129,13 @@ const AdminAILogs = ({ onPrefillKnowledge }: { onPrefillKnowledge?: (q: string) 
                         <button
                             onClick={() => updateSetting('current_status')}
                             disabled={saving['current_status']}
-                            className="text-xs font-bold text-blue-500 hover:text-blue-400 disabled:opacity-50"
+                            className="text-xs font-bold text-primary hover:text-primary-light disabled:opacity-50"
                         >
                             {saving['current_status'] ? "Enregistrement..." : "Sauvegarder"}
                         </button>
                     </div>
                     <textarea
-                        className="w-full min-h-[120px] p-3 rounded-lg bg-card border border-border text-sm focus:ring-2 focus:ring-blue-500/50 outline-none transition-all"
+                        className="w-full min-h-[120px] p-3 rounded-lg bg-card border border-border text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all"
                         placeholder="Ex: Actuellement à Oujda, disponible pour un stage..."
                         value={settings.current_status}
                         onChange={(e) => setSettings(prev => ({ ...prev, current_status: e.target.value }))}
@@ -166,7 +166,7 @@ const AdminAILogs = ({ onPrefillKnowledge }: { onPrefillKnowledge?: (q: string) 
                                 key={session.id}
                                 onClick={() => getSessionDetails(session.id)}
                                 className={`p-4 rounded-xl border transition-all cursor-pointer relative group ${selectedSession?.id === session.id
-                                    ? "bg-blue-500/10 border-blue-500/40"
+                                    ? "bg-primary/10 border-primary/40"
                                     : "bg-white/5 border-white/10 hover:border-white/20"
                                     }`}
                             >
@@ -212,7 +212,7 @@ const AdminAILogs = ({ onPrefillKnowledge }: { onPrefillKnowledge?: (q: string) 
                                 {selectedSession.messages.map((msg) => (
                                     <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                         <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.role === 'user'
-                                            ? 'bg-blue-600 text-white rounded-tr-none'
+                                            ? 'bg-primary text-white rounded-tr-none'
                                             : 'bg-white/10 text-foreground rounded-tl-none'
                                             }`}>
                                             <p>{msg.content}</p>

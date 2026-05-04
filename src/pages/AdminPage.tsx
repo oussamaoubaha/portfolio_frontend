@@ -63,11 +63,20 @@ const AdminPage = () => {
       {/* Header */}
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <a href="/" className="font-heading text-xl font-bold text-foreground">
-              O.O
+          <div className="flex items-center gap-3 group">
+            <a href="/" className="flex items-center gap-2" aria-label="Accueil">
+              <div className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-primary/5 border border-primary/10 group-hover:border-primary/30 transition-all overflow-hidden">
+                <img
+                  src="/images/Logo_oubaha.jpg"
+                  alt="Logo"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <span className="font-heading font-bold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors">
+                Oussama
+              </span>
             </a>
-            <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full">
+            <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
               Admin
             </span>
           </div>

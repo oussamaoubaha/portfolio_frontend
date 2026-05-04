@@ -8,7 +8,7 @@ const TypingIndicator = () => (
         {[0, 1, 2].map((i) => (
             <motion.div
                 key={i}
-                className="w-1.5 h-1.5 bg-blue-400 rounded-full"
+                className="w-1.5 h-1.5 bg-primary-light rounded-full"
                 animate={{ y: [0, -5, 0] }}
                 transition={{
                     duration: 0.6,
@@ -106,13 +106,13 @@ const ChatOrb = () => {
                         e.stopPropagation();
                         setIsOpen(!isOpen);
                     }}
-                    className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-[0_8px_30px_rgb(37,99,235,0.4)] focus:outline-none group"
+                    className="relative w-14 h-14 rounded-full bg-primary flex items-center justify-center text-white shadow-[0_8px_30px_rgba(59,130,246,0.4)] focus:outline-none group"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                 >
                     {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
                     <motion.div
-                        className="absolute inset-0 rounded-full bg-blue-400/30 -z-10"
+                        className="absolute inset-0 rounded-full bg-primary-light/30 -z-10"
                         animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
                     />
@@ -128,7 +128,7 @@ const ChatOrb = () => {
                         animate={{ opacity: 1, scale: 1, rotate: 0, y: 0, x: 0 }}
                         exit={{ opacity: 0, scale: 0.5, rotate: 5, y: 100, x: 50 }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed bottom-28 right-8 w-[350px] md:w-[400px] max-h-[min(600px,80vh)] z-40 flex flex-col bg-white/10 dark:bg-black/30 backdrop-blur-3xl border border-white/20 dark:border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(37,99,235,0.2)] overflow-hidden"
+                        className="fixed bottom-28 right-8 w-[350px] md:w-[400px] max-h-[min(600px,80vh)] z-40 flex flex-col bg-white/10 dark:bg-black/30 backdrop-blur-3xl border border-white/20 dark:border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(59,130,246,0.2)] overflow-hidden"
                     >
                         {/* Header */}
                         <div className="p-5 border-b border-white/10 flex items-center justify-between bg-white/5">
@@ -137,7 +137,7 @@ const ChatOrb = () => {
                                     <img
                                         src="/Assistant.png"
                                         alt="Logo"
-                                        className="w-10 h-10 rounded-full border border-blue-400/50 shadow-[0_0_12px_rgba(59,130,246,0.4)] object-cover"
+                                        className="w-10 h-10 rounded-full border border-primary-light/50 shadow-[0_0_12px_rgba(59,130,246,0.4)] object-cover"
                                     />
                                     <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white/20 rounded-full animate-pulse" />
                                 </div>
@@ -155,12 +155,12 @@ const ChatOrb = () => {
                         <div className="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar" ref={scrollRef}>
                             {messages.length === 0 && (
                                 <div className="text-center py-10 px-6">
-                                    <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-500">
+                                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
                                         <img src="/Assistant.png" alt="Logo" className="w-10 h-10 rounded-full object-cover opacity-80" />
                                     </div>
                                     <h4 className="text-slate-900 dark:text-white font-semibold mb-2">Salam!</h4>
                                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                                        Je suis <span className="text-blue-500 font-bold">OUBA-SYS</span>, le guide intelligent d'Oussama. Je suis ici pour te parler de son parcours de dev, ses projets, et ses racines.
+                                        Je suis <span className="text-primary font-bold">OUBA-SYS</span>, le guide intelligent d'Oussama. Je suis ici pour te parler de son parcours de dev, ses projets, et ses racines.
                                     </p>
                                 </div>
                             )}
@@ -175,14 +175,14 @@ const ChatOrb = () => {
                                         {msg.role === "ai" && (
                                             <img
                                                 src="/Assistant.png"
-                                                className="w-9 h-9 rounded-full border border-blue-400/30 object-contain flex-shrink-0 self-end mb-1"
-                                                style={{ filter: "drop-shadow(0 0-6px rgba(37,99,235,0.6))" }}
+                                                className="w-9 h-9 rounded-full border border-primary-light/30 object-contain flex-shrink-0 self-end mb-1"
+                                                style={{ filter: "drop-shadow(0 0 6px var(--color-primary))" }}
                                                 alt="AI"
                                             />
                                         )}
                                         <div
                                             className={`max-w-[85%] p-4 text-sm shadow-sm ${msg.role === "user"
-                                                ? "bg-blue-600 text-white rounded-2xl rounded-tr-none"
+                                                ? "bg-primary-dark text-white rounded-2xl rounded-tr-none"
                                                 : "bg-white/10 dark:bg-white/5 text-slate-900 dark:text-slate-200 border border-white/10 rounded-2xl rounded-tl-none backdrop-blur-md"
                                                 }`}
                                         >
@@ -195,7 +195,7 @@ const ChatOrb = () => {
                                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex gap-3">
                                     <img
                                         src="/Assistant.png"
-                                        className="w-8 h-8 rounded-full border border-blue-400/30 shadow-[0_0_8px_rgba(59,130,246,0.3)] object-cover animate-pulse self-end mb-1"
+                                        className="w-8 h-8 rounded-full border border-primary-light/30 shadow-[0_0_8px_var(--color-primary)] object-cover animate-pulse self-end mb-1"
                                         alt="AI"
                                     />
                                     <TypingIndicator />
@@ -212,14 +212,14 @@ const ChatOrb = () => {
                                     onChange={(e) => setMessage(e.target.value)}
                                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
                                     placeholder="Posez votre question..."
-                                    className="flex-1 bg-white/5 dark:bg-black/20 border border-white/10 rounded-2xl px-5 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all placeholder:text-slate-500"
+                                    className="flex-1 bg-white/5 dark:bg-black/20 border border-white/10 rounded-2xl px-5 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all placeholder:text-slate-500"
                                 />
                                 <motion.button
                                     onClick={handleSend}
                                     disabled={isLoading || !message.trim()}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:grayscale transition-all"
+                                    className="w-11 h-11 rounded-xl bg-primary-dark text-white flex items-center justify-center shadow-lg shadow-primary/20 disabled:opacity-50 disabled:grayscale transition-all"
                                 >
                                     <Send size={18} />
                                 </motion.button>

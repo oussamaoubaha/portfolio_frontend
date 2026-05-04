@@ -24,7 +24,10 @@ export interface Project {
     description: string;
     image_url?: string;
     project_url?: string;
+    github_url?: string;
     technologies?: string[];
+    category?: "web" | "mobile" | "ia" | "data" | "other";
+    featured?: boolean;
     order?: number;
 }
 

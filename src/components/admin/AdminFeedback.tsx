@@ -94,7 +94,7 @@ const AdminFeedback = () => {
                     <p className="text-xs text-primary font-medium">Saisi : {item.guest_email}</p>
                   )}
                   {item.google_email && (
-                    <p className="text-xs text-blue-500 font-medium">Google : {item.google_email}</p>
+                    <p className="text-xs text-primary font-medium">Google : {item.google_email}</p>
                   )}
                   <p className="text-xs text-muted-foreground mt-1">
                     {new Date(item.created_at).toLocaleDateString("fr-FR", {

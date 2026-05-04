@@ -149,7 +149,7 @@ const KnowledgeManager = ({ prefillQuestion, onClearPrefill }: { prefillQuestion
                         <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                             <button
                                 onClick={() => startEdit(item)}
-                                className="p-2 hover:bg-muted rounded-md text-blue-500"
+                                className="p-2 hover:bg-muted rounded-md text-primary"
                             >
                                 <Pencil size={18} />
                             </button>

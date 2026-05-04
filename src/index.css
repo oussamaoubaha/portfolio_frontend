@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import '@fontsource/space-grotesk/400.css';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+
+/* Force font-display: swap for all @fontsource fonts to prevent render blocking */
+@font-face { font-family: 'Space Grotesk'; font-display: swap; }
+@font-face { font-family: 'Inter'; font-display: swap; }
 
 @tailwind base;
 @tailwind components;
@@ -6,144 +16,104 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222 47% 11%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 215 20% 95%;
-    --secondary-foreground: 222 47% 11%;
-
-    --muted: 215 20% 94%;
-    --muted-foreground: 215 16% 47%;
-
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 215 20% 90%;
-    --input: 215 20% 90%;
-    --ring: 217 91% 60%;
-
-    --radius: 0.75rem;
-
-    /* Custom portfolio tokens */
-    --hero-bg: 222 47% 7%;
-    --hero-foreground: 210 20% 98%;
-    --hero-muted: 215 20% 65%;
-    --section-alt: 215 25% 96%;
-    --accent-glow: 217 91% 60%;
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(199 89% 48%));
-    --gradient-hero: linear-gradient(160deg, hsl(222 47% 7%) 0%, hsl(222 47% 12%) 50%, hsl(217 50% 15%) 100%);
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: #050A14;
+    --foreground: #F8FAFC;
+    --primary: #3B82F6;
+    --secondary: #06B6D4;
+    --muted: #94a3b8;
+    --card: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --radius: 1rem;
+    --gradient: linear-gradient(135deg, #3B82F6, #06B6D4);
   }
 
-  .dark {
-    --background: 222 47% 7%;
-    --foreground: 210 20% 98%;
-    --card: 222 47% 10%;
-    --card-foreground: 210 20% 98%;
-    --popover: 222 47% 10%;
-    --popover-foreground: 210 20% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 212 27% 84%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-    --section-alt: 222 47% 10%;
+  /* Only hide cursor on devices that actually have a pointer (desktop) */
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none;
+    }
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
+  /* Accessibility: focus-visible styles for keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Clash Display', sans-serif;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] to-[#06B6D4];
   }
 
-  .bg-hero {
-    background-image: var(--gradient-hero);
+  .glass-morphism {
+    @apply bg-[rgba(255,255,255,0.03)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.08)];
   }
 
-  .section-alt {
-    background-color: hsl(var(--section-alt));
+  .magnetic-button {
+    @apply relative transition-transform duration-300 ease-out;
   }
 
-  .glow {
-    box-shadow: 0 0 30px -5px hsl(var(--accent-glow) / 0.3);
-  }
-
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary) / 0.2);
-    border-radius: 10px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.3);
+  .perspective-1000 {
+    perspective: 1000px;
   }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Lenis smooth scroll recommended CSS */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Cursor Styles */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: #3B82F6;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.1s ease-out;
+}
+
+#custom-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s ease-out;
 }

@@ -3,42 +3,69 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@/hooks/useTheme";
+import { lazy, Suspense, useEffect } from "react";
+import Lenis from "lenis";
+import Preloader from "./components/Preloader";
+import CustomCursor from "./components/CustomCursor";
+
+// Eager: critical shell
 import Index from "./pages/Index";
-import AuthPage from "./pages/AuthPage";
-import AdminPage from "./pages/AdminPage";
-import NotFound from "./pages/NotFound";
+
+// Lazy: non-critical pages
+const AuthPage = lazy(() => import("./pages/AuthPage"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ChatWidget = lazy(() => import("./components/ChatWidget/ChatWidget"));
 
 const queryClient = new QueryClient();
 
-import { useEffect } from "react";
-import api from "@/services/api";
-
 const App = () => {
   useEffect(() => {
-    // Survival Test: Check connection to Laravel
-    api.get('/ping')
-      .then(res => console.log("✅ PING TEST SUCCESS:", res.data))
-      .catch(err => console.error("❌ PING TEST FAILED:", err));
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => { lenis.destroy(); };
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/admin" element={<AdminPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
+      <TooltipProvider>
+        <Preloader />
+        <CustomCursor />
+        <Suspense fallback={null}>
+          <ChatWidget />
+        </Suspense>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true,
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Suspense fallback={null}><AuthPage /></Suspense>} />
+            <Route path="/admin" element={<Suspense fallback={null}><AdminPage /></Suspense>} />
+            <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 };

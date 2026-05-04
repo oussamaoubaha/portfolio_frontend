@@ -5,7 +5,7 @@ const AIAssistantSection = () => {
     return (
         <section id="ai-architecture" className="py-24 relative overflow-hidden">
             {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 blur-[100px] rounded-full -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[100px] rounded-full -z-10" />
 
             <div className="container mx-auto px-6">
                 <div className="max-w-5xl mx-auto">
@@ -31,9 +31,9 @@ const AIAssistantSection = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-blue-500/30 transition-all duration-300 group"
+                            className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-primary/30 transition-all duration-300 group"
                         >
-                            <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 text-blue-500 group-hover:scale-110 transition-transform">
+                            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                                 <Database size={24} />
                             </div>
                             <h3 className="text-slate-900 dark:text-white text-xl font-semibold mb-3">
@@ -49,9 +49,9 @@ const AIAssistantSection = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-blue-500/30 transition-all duration-300 group"
+                            className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-primary/30 transition-all duration-300 group"
                         >
-                            <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 text-blue-500 group-hover:scale-110 transition-transform">
+                            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                                 <Brain size={24} />
                             </div>
                             <h3 className="text-slate-900 dark:text-white text-xl font-semibold mb-3">
@@ -67,9 +67,9 @@ const AIAssistantSection = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.3 }}
-                            className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-blue-500/30 transition-all duration-300 group"
+                            className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-primary/30 transition-all duration-300 group"
                         >
-                            <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 text-blue-500 group-hover:scale-110 transition-transform">
+                            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
                                 <Zap size={24} />
                             </div>
                             <h3 className="text-slate-900 dark:text-white text-xl font-semibold mb-3">
@@ -99,10 +99,10 @@ const AIAssistantSection = () => {
                                 </div>
                             </div>
                             <div className="flex gap-4 items-start flex-row-reverse">
-                                <div className="w-10 h-10 rounded-full bg-blue-600 flex-shrink-0 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-blue-500/20">
+                                <div className="w-10 h-10 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-primary/20">
                                     AI
                                 </div>
-                                <div className="bg-blue-600/20 border border-blue-500/30 rounded-2xl rounded-tr-none p-4 text-sm text-blue-50 max-w-[80%]">
+                                <div className="bg-primary/20 border border-primary/30 rounded-2xl rounded-tr-none p-4 text-sm text-slate-50 max-w-[80%]">
                                     <p>Oussama n'a pas listé Java, mais son expertise en C++ et JS lui permet d'apprendre très vite.</p>
                                 </div>
                             </div>

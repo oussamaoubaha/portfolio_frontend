@@ -12,7 +12,18 @@
   <meta name="author" content="Oussama Oubaha" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https://oussama-oubaha-ruby.vercel.app/ https://portfoliobackend-production-e64b.up.railway.app; connect-src 'self' https://oussama-oubaha-ruby.vercel.app/ https://portfoliobackend-production-e64b.up.railway.app;" />
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https://oussama-oubaha-ruby.vercel.app/ https://portfoliobackend-production-e64b.up.railway.app https://api.dicebear.com; connect-src 'self' https://oussama-oubaha-ruby.vercel.app/ https://portfoliobackend-production-e64b.up.railway.app https://api.groq.com https://api.emailjs.com;" />
+
+  <link rel="dns-prefetch" href="//oussama-oubaha-ruby.vercel.app" />
+  <link rel="dns-prefetch" href="//portfoliobackend-production-e64b.up.railway.app" />
+  <link rel="dns-prefetch" href="//api.groq.com" />
+  <link rel="dns-prefetch" href="//api.emailjs.com" />
+  <link rel="preconnect" href="https://api.groq.com" crossorigin />
+  <link rel="preconnect" href="https://api.emailjs.com" crossorigin />
+  <meta name="theme-color" content="#050A14" />
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/OUSSAMA.webp" as="image" type="image/webp" fetchpriority="high" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
