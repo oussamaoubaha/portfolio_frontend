@@ -4,7 +4,7 @@ import {
   IconMysql, IconMongodb, IconPostgres,
   IconGit, IconGithub, IconDocker, IconVite, IconPostman,
   IconFigma, IconFramer
-} from "@/components/UI/Icons";
+} from "@/components/ui/Icons";
 
 export const SKILL_CATEGORIES = [
   {

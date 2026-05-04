@@ -1,4 +1,4 @@
-import { IconReact, IconJavascript, IconTailwind, IconPhp, IconLaravel, IconMysql, IconMongodb, IconGit, IconFigma, IconTypescript, IconPostman, IconVercel, IconDocker, IconPostgres, IconFramer } from "@/components/UI/Icons";
+import { IconReact, IconJavascript, IconTailwind, IconPhp, IconLaravel, IconMysql, IconMongodb, IconGit, IconFigma, IconTypescript, IconPostman, IconVercel, IconDocker, IconPostgres, IconFramer } from "@/components/ui/Icons";
 
 export const SKILL_DATA = [
   { name: "React", icon: IconReact, color: "#61DAFB" },

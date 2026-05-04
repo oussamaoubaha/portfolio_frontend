@@ -1,4 +1,4 @@
-import { IconGithub, IconLinkedin, IconInstagram, IconFacebook, IconWhatsapp, IconEmail } from "@/components/UI/Icons";
+import { IconGithub, IconLinkedin, IconInstagram, IconFacebook, IconWhatsapp, IconEmail } from "@/components/ui/Icons";
 
 export const SOCIAL_LINKS = [
   { name: "GitHub", url: "https://github.com/oussamaoubaha", icon: IconGithub, color: "#ffffff", glow: "rgba(255,255,255,0.3)", bg: "#24292e" },
