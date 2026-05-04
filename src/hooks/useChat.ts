@@ -1,13 +1,10 @@
 import { useState, useRef } from 'react';
-import Groq from "groq-sdk";
+
 import { SYSTEM_PROMPT } from '../constants/systemPrompt';
 
 // Initialize Groq client
 // Note: In a production app, you should call your own backend to hide the API key
-const groq = new Groq({
-  apiKey: import.meta.env.VITE_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true // Required for client-side usage
-});
+// Note: The Groq client SDK instantiation was removed because it was unused and caused a crash when the API key was missing.
 
 export const useChat = () => {
   const [messages, setMessages] = useState<any[]>([]);
