@@ -1,73 +1,98 @@
-# Welcome to your Lovable project
+<div align="center">
+  <img src="public/favicon.svg" alt="Logo" width="80" height="80">
+  <h1 align="center">Portfolio Frontend - Oussama Oubaha</h1>
 
-## Project info
+  <p align="center">
+    Un portfolio moderne, performant et interactif construit avec React, TypeScript et Tailwind CSS.
+    <br />
+    <br />
+    <a href="https://oussama-oubaha.vercel.app/"><strong>Voir le site en direct »</strong></a>
+    <br />
+  </p>
+</div>
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## 🌟 À propos du Projet
 
-There are several ways of editing your application.
+Ce projet représente l'interface utilisateur de mon portfolio professionnel. Conçu pour offrir une expérience utilisateur exceptionnelle (UX/UI), il intègre des animations fluides, un design en "glassmorphism", ainsi qu'un assistant IA intelligent interactif.
 
-**Use Lovable**
+### ✨ Fonctionnalités Principales
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **Assistant IA Intégré (OUBA-SYS)** : Un chatbot alimenté par l'API de Groq (Llama 3) pour répondre instantanément aux questions des visiteurs concernant mon parcours.
+- **Animations & Interactivité** : Transitions de pages et éléments animés au défilement grâce à **Framer Motion** et **Lenis** (Smooth Scroll).
+- **Formulaire de Contact Dynamique** : Envoi d'emails directs depuis le navigateur configuré via **EmailJS**.
+- **Performances Optimisées** : Code-splitting (chargement asynchrone avec `React.lazy`), images WebP, et SVG en ligne garantissant un score Lighthouse de 90+.
+- **Design Moderne** : Utilisation de **Tailwind CSS** pour un layout 100% responsive et des effets visuels soignés (flous, dégradés, custom cursors).
+- **Données API** : Intégration backend Laravel (hébergé sur Railway) gérée via des requêtes optimisées.
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Stack Technique
 
-**Use your preferred IDE**
+- **Framework** : React 18, Vite.js
+- **Langage** : TypeScript
+- **Style** : Tailwind CSS, Shadcn/UI
+- **Animations** : Framer Motion, Lenis (Smooth Scroll)
+- **Services Tiers** : 
+  - Groq API (Assistant IA)
+  - EmailJS (Formulaire de contact)
+  - DiceBear API (Avatars)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Installation & Lancement en local
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Pour faire tourner le projet localement, suivez ces instructions :
 
-Follow these steps:
+### Prérequis
+- Node.js (v18+)
+- npm ou yarn
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Étapes
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. **Cloner le dépôt**
+   ```bash
+   git clone https://github.com/oussamaoubaha/portfolio_frontend.git
+   cd portfolio_frontend
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. **Installer les dépendances**
+   ```bash
+   npm install
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+3. **Configurer les variables d'environnement**
+   Créez un fichier `.env.local` à la racine du projet et ajoutez vos propres clés (voir le modèle `.env.example`) :
+   ```env
+   VITE_GROQ_API_KEY=votre_cle_api_groq
+   VITE_EMAILJS_SERVICE_ID=votre_service_id
+   VITE_EMAILJS_TEMPLATE_ID=votre_template_id
+   VITE_EMAILJS_PUBLIC_KEY=votre_public_key
+   ```
+
+4. **Lancer le serveur de développement**
+   ```bash
+   npm run dev
+   ```
+   Le site sera accessible sur `http://localhost:5173`.
+
+## 📦 Build pour la production
+
+Pour compiler le projet pour la production :
+
+```bash
+npm run build
+```
+Les fichiers générés se trouveront dans le dossier `dist/`. Vous pouvez tester le rendu localement avec :
+```bash
+npm run preview
 ```
 
-**Edit a file directly in GitHub**
+## 🌐 Déploiement
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Ce projet est optimisé pour être déployé sur **Vercel**. 
+Il inclut un fichier `vercel.json` configuré pour gérer le Content Security Policy (CSP) et les redirections Single Page Application (SPA). N'oubliez pas d'ajouter vos variables d'environnement directement dans les paramètres de votre projet Vercel.
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+<div align="center">
+  Développé avec passion par <strong>Oussama Oubaha</strong>.<br>
+  Étudiant en Génie Informatique.
+</div>
