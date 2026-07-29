@@ -1,0 +1,145 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { LogOut, User, Wrench, Briefcase, MessageSquare, GraduationCap, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
+import AdminProfile from "@/components/admin/AdminProfile";
+import AdminSkills from "@/components/admin/AdminSkills";
+import AdminExperiences from "@/components/admin/AdminExperiences";
+import AdminFeedback from "@/components/admin/AdminFeedback";
+import AdminEducation from "@/components/admin/AdminEducation";
+import AdminAILogs from "@/components/admin/AdminAILogs";
+import KnowledgeManager from "@/components/admin/KnowledgeManager";
+import AdminProjects from "@/components/admin/AdminProjects";
+import { Bot, BookOpen, Layout } from "lucide-react";
+
+type Tab = "profile" | "skills" | "experiences" | "projects" | "education" | "feedback" | "ai_logs" | "knowledge";
+
+const AdminPage = () => {
+  const { user, isAdmin, loading, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<Tab>("profile");
+  const [prefillKnowledge, setPrefillKnowledge] = useState<string | null>(null);
+  const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/auth");
+    }
+  }, [user, loading, navigate]);
+
+  useEffect(() => {
+    if (!loading && user && !isAdmin) {
+      toast.error("Accès refusé. Vous n'êtes pas administrateur.");
+      navigate("/");
+    }
+  }, [isAdmin, loading, user, navigate]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
+
+  if (!user || !isAdmin) return null;
+
+  const tabs: { id: Tab; label: string; icon: React.ElementType }[] = [
+    { id: "profile", label: "Profil", icon: User },
+    { id: "skills", label: "Compétences", icon: Wrench },
+    { id: "experiences", label: "Expériences", icon: Briefcase },
+    { id: "projects", label: "Projets", icon: Layout },
+    { id: "education", label: "Formation", icon: GraduationCap },
+    { id: "feedback", label: "Avis", icon: MessageSquare },
+    { id: "ai_logs", label: "Assistant OUBA-SYS", icon: Bot },
+    { id: "knowledge", label: "Base de Connaissances", icon: BookOpen },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="border-b border-border bg-card sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3 group">
+            <a href="/" className="flex items-center gap-2" aria-label="Accueil">
+              <div className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-primary/5 border border-primary/10 group-hover:border-primary/30 transition-all overflow-hidden">
+                <img
+                  src="/images/Logo_oubaha.jpg"
+                  alt="Logo"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <span className="font-heading font-bold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors">
+                Oussama
+              </span>
+            </a>
+            <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
+              Admin
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground"
+            >
+              {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
+            <button
+              onClick={async () => {
+                await signOut();
+                navigate("/");
+              }}
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <LogOut size={16} />
+              Déconnexion
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-6 py-8">
+        <h1 className="font-heading text-3xl font-bold text-foreground mb-8">
+          Tableau de bord
+        </h1>
+
+        {/* Tabs */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
+                }`}
+            >
+              <tab.icon size={16} />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="max-w-4xl">
+          {activeTab === "profile" && <AdminProfile userId={user.id} />}
+          {activeTab === "skills" && <AdminSkills userId={user.id} />}
+          {activeTab === "experiences" && <AdminExperiences userId={user.id} />}
+          {activeTab === "projects" && <AdminProjects userId={user.id} />}
+          {activeTab === "education" && <AdminEducation userId={user.id} />}
+          {activeTab === "feedback" && <AdminFeedback />}
+          {activeTab === "ai_logs" && <AdminAILogs onPrefillKnowledge={(q) => {
+            setPrefillKnowledge(q);
+            setActiveTab("knowledge");
+          }} />}
+          {activeTab === "knowledge" && <KnowledgeManager prefillQuestion={prefillKnowledge} onClearPrefill={() => setPrefillKnowledge(null)} />}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminPage;
