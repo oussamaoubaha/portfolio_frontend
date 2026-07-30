@@ -83,7 +83,7 @@ export const portfolioData = {
         role: "Développeur Web Fullstack",
         company: "SupMti",
         location: "Oujda, Maroc",
-        period: "2026 (Avril - Aujourd'hui)",
+        period: "2026 (Avril - Juin)",
         type: "Stage",
         missions: [
           "Création d'une application de Gestion Scolaire performante",
@@ -112,13 +112,13 @@ export const portfolioData = {
         role: "Développeur Web Fullstack",
         company: "MediaTower-tech",
         location: "Fès, Maroc",
-        period: "2025 - 2026 (Décembre - Avril)",
+        period: "2025 - 2026 (Décembre - Juin)",
         type: "Stage",
         missions: [
-          "Conception et développement intégral de la plateforme machro3y.com",
-          "Mise en place d'un Backend robuste avec Laravel et gestion de base de données MySQL",
-          "Développement d'interfaces dynamiques avec Laravel Blade et Tailwind CSS",
-          "Focus sur l'UX Design et l'optimisation responsive pour mobile et desktop",
+          "Projet 1 - machro3y.com : Conception et développement intégral de la plateforme (Backend Laravel/MySQL, Frontend Blade/Tailwind CSS)",
+          "Projet 2 - MediaTower AI (Plateforme de Marché d'Agents IA) : Développement d'une architecture moderne Frontend (React.js, Vite, Tailwind, Framer Motion) et Backend (Laravel 12)",
+          "Intégration d'un moteur de recommandation d'Intelligence Artificielle basé sur le NLP (Python, FastAPI, TF-IDF)",
+          "Mise en place de l'authentification (Google Sign-In) et création de tableaux de bord interactifs (Admin & Utilisateur)"
         ],
       },
       {
