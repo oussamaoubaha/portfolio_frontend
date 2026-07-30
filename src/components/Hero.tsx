@@ -34,7 +34,7 @@ const HexagonGrid: React.FC = () => {
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20 px-4">
       {/* Background Effects */}
       <HexagonGrid />
 
@@ -42,13 +42,13 @@ const Hero: React.FC = () => {
       <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-primary/20 blur-[120px] animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-secondary/20 blur-[120px] animate-pulse delay-1000" />
 
-      <div className="container relative z-10 px-6 text-center">
+      <div className="container relative z-10 px-4 text-center">
         {/* Availability Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/5 px-4 py-2 text-xs font-semibold text-green-400"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/5 px-3 py-1.5 text-[10px] sm:text-xs font-semibold text-green-400"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
 
         {/* Profile Image with Ring */}
         <div
-          className="relative mx-auto mb-10 h-32 w-32"
+          className="relative mx-auto mb-8 h-24 w-24 sm:h-32 sm:w-32"
         >
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary p-[2px] animate-spin-slow">
             <div className="h-full w-full rounded-full bg-background" />
@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
         </motion.p>
 
         {/* Name */}
-        <h1 className="mb-6 font-display text-6xl font-bold tracking-tight text-white md:text-8xl lg:text-9xl">
+        <h1 className="mb-4 font-display text-4xl font-bold tracking-tight text-white sm:text-6xl md:text-8xl lg:text-9xl leading-tight">
           Oussama <span className="text-gradient">Oubaha</span>
         </h1>
 
@@ -97,7 +97,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
-          className="mb-8 h-8 text-xl font-medium text-foreground/80 md:text-2xl"
+          className="mb-6 h-8 text-base font-medium text-foreground/80 sm:text-xl md:text-2xl"
         >
           <Typewriter
             words={[
@@ -120,18 +120,18 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
         >
           <a
             href="#projects"
-            className="group flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-bold text-black transition-all hover:scale-105"
+            className="group flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-black transition-all hover:scale-105 sm:w-auto sm:px-8 sm:py-4"
           >
             Voir mes projets
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </a>
           <a
             href="#contact"
-            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold backdrop-blur-sm transition-all hover:bg-white/10 hover:scale-105"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-bold backdrop-blur-sm transition-all hover:bg-white/10 hover:scale-105 sm:w-auto sm:px-8 sm:py-4"
           >
             Me contacter
           </a>

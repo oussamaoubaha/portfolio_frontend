@@ -5,9 +5,9 @@ import { SKILL_DATA } from '../constants/skillIcons';
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="relative py-32">
+    <section id="skills" className="relative py-16 sm:py-32">
       {/* Huge Ghost Text */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 select-none font-display text-[15vw] font-black text-white/[0.02]">
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 select-none font-display text-[20vw] sm:text-[15vw] font-black text-white/[0.02] overflow-hidden w-full text-center">
         SKILLS
       </div>
 

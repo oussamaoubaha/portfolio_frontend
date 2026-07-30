@@ -49,11 +49,11 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
+    <section id="contact" className="relative py-16 sm:py-32 overflow-hidden">
       <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
 
-      <div className="container relative z-10 px-6">
-        <div className="grid gap-20 lg:grid-cols-2">
+      <div className="container relative z-10 px-4 sm:px-6">
+        <div className="grid gap-12 lg:gap-20 lg:grid-cols-2">
           {/* Left: Info */}
           <div>
             <motion.h2

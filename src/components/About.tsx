@@ -17,9 +17,9 @@ const About: React.FC = () => {
 
   const text = "Je suis un développeur Full Stack passionné par la création d'interfaces numériques exceptionnelles. Actuellement étudiant de l'EST à l'UMP Oujda en Conception et Développement de Logiciels (CDL), je mets mes compétences au service de projets innovants en tant que stagiaire .";
   return (
-    <section id="about" className="relative py-32 overflow-hidden">
+    <section id="about" className="relative py-16 sm:py-32 overflow-hidden">
       <div className="container px-6">
-        <div className="grid gap-20 lg:grid-cols-2">
+        <div className="grid gap-12 lg:gap-20 lg:grid-cols-2">
           {/* Left Side: Text Reveal */}
           <div ref={ref}>
             <motion.h2
@@ -41,7 +41,7 @@ const About: React.FC = () => {
                     delay: i * 0.03,
                     ease: [0.215, 0.61, 0.355, 1],
                   }}
-                  className="font-display text-3xl font-medium leading-tight text-white md:text-5xl"
+                  className="font-display text-2xl font-medium leading-tight text-white sm:text-3xl md:text-5xl"
                 >
                   {word}
                 </motion.span>
@@ -58,9 +58,9 @@ const About: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.5 + i * 0.1 }}
-                  className="glass-morphism rounded-3xl p-8"
+                  className="glass-morphism rounded-2xl p-5 sm:p-8 sm:rounded-3xl"
                 >
-                  <div className="mb-2 font-display text-5xl font-bold text-gradient">
+                  <div className="mb-2 font-display text-4xl sm:text-5xl font-bold text-gradient">
                     {inView ? (
                       <CountUp end={stat.value} duration={2.5} suffix={stat.suffix} />
                     ) : (
@@ -77,7 +77,7 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.8 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-secondary p-8 text-white"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-secondary p-5 sm:p-8 text-white sm:rounded-3xl"
               >
                 <div className="relative z-10 text-xl font-bold">
                   Toujours prêt pour de nouveaux défis.

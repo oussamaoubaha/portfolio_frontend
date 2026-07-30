@@ -40,7 +40,7 @@ const ProjectCard = React.forwardRef<HTMLDivElement, { project: Project }>(({ pr
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4 }}
-      className="group relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-transform duration-300 hover:scale-[1.02] hover:-translate-y-1"
+      className="group relative min-h-[220px] sm:aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 transition-transform duration-300 hover:scale-[1.02] hover:-translate-y-1"
     >
       <div className="h-full w-full">
         <img
@@ -153,8 +153,8 @@ const Projects: React.FC = () => {
   const titleRest = titleParts.slice(1).join(' ');
 
   return (
-    <section id="projects" className="py-32">
-      <div className="container px-6">
+    <section id="projects" className="py-16 sm:py-32">
+      <div className="container px-4 sm:px-6">
         <div className="mb-16 flex flex-col items-end justify-between gap-8 lg:flex-row">
           <div className="max-w-2xl">
             <motion.h2
@@ -213,7 +213,7 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:gap-8">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.id} project={project as unknown as Project} />

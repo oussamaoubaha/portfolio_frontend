@@ -17,11 +17,11 @@ const TestimonialCard: React.FC<{
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="glass-morphism relative rounded-3xl p-8 flex flex-col h-full"
+      className="glass-morphism relative rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col h-full"
     >
       <Quote size={40} className="absolute top-6 right-8 text-primary/10" />
       
-      <p className="mb-8 text-lg leading-relaxed text-foreground/80 italic flex-grow">
+      <p className="mb-6 text-sm sm:text-lg leading-relaxed text-foreground/80 italic flex-grow">
         "{content}"
       </p>
       
@@ -31,7 +31,7 @@ const TestimonialCard: React.FC<{
             <img src={avatar} alt={name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </div>
           <div>
-            <p className="font-display text-lg font-bold text-white">{name}</p>
+            <p className="font-display text-base sm:text-lg font-bold text-white">{name}</p>
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
               {role}
             </p>
@@ -63,9 +63,9 @@ const Testimonials: React.FC = () => {
   if (reviews.length === 0) return null;
 
   return (
-    <section id="avis" className="py-32">
+    <section id="avis" className="py-16 sm:py-32">
       <div className="container px-6">
-        <div className="mb-20 text-center">
+        <div className="mb-12 sm:mb-20 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ const Testimonials: React.FC = () => {
           </motion.h2>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        <div className="grid gap-5 sm:gap-8 grid-cols-1 sm:grid-cols-2">
           {reviews.map((review, i) => (
             <TestimonialCard key={i} {...review} index={i} />
           ))}
